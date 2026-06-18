@@ -1,0 +1,22 @@
+# render.yaml — Render Blueprint for Luna Creative Assets
+# Dashboard: New -> Blueprint -> connect sachal-droid/luna-creative-assets
+#
+# NOTE: A persistent disk requires a paid Render instance type.
+# On the free tier the disk is ephemeral, so uploaded images will NOT
+# survive redeploys or restarts. Uncomment the "disk" block and switch
+# "plan" to a paid tier (e.g. starter) for persistent uploads.
+services:
+  - type: web
+    name: luna-creative-assets
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATA_DIR
+        value: /data
+    # disk:
+    #   name: luna-data
+    #   mountPath: /data
+    #   sizeGB: 1
